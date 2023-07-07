@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/dev?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    validationQuery: select 1
+    test-on-borrow: true
+    hikari:
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 50
+      connection-timeout: 60000
+
+  # jpa
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+
+logging:
+  config: classpath:log4j2-dev.xml
